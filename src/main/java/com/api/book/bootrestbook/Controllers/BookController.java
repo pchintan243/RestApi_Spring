@@ -29,7 +29,7 @@ public class BookController {
         if (allBooks.size() <= 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.of(Optional.of(allBooks));
+        return ResponseEntity.ok(allBooks);
     }
 
     @GetMapping("book/{id}")
@@ -38,7 +38,7 @@ public class BookController {
         if (getBookById == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.of(Optional.of(getBookById));
+        return ResponseEntity.ok(getBookById);
     }
 
     @PostMapping("/createBook")
@@ -53,13 +53,13 @@ public class BookController {
         if (updatedBook == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.ok().body(updatedBook);
+        return ResponseEntity.ok(updatedBook);
     }
 
     @DeleteMapping("deleteBook/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable("id") int id) {
         bookService.deleteBook(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
